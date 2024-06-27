@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APLICACION PARA CONSURTAR TU CLIMA</title>
+    <link rel="icon" type="image/x-icon" href="/static/ima.jpg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        h1 {
+            font-family:Georgia, 'Times New Roman', Times, serif;
+        }
+    </style>
+</head>
+
+<body background="{{url_for('static',filename='fondo.jpg')}}">
+    <div class="container">
+        <form method="post">
+            <br>
+            <center>
+                <h1 style="color: rgba(126, 126, 148, 0.655); ">CONSULTA EL CLIMA</h1>
+                <br>
+                <img src="{{url_for('static', filename='gif.gif') }}" width="200" alt="logo del clima">
+                <br>
+                <br>
+
+                <input type="text" name="txtciudad" placeholder="Ciudad a Buscar"></input>
+                <button type="submit" class="btn btn-dark">Consultar</button>
+                <button type="reset" class="btn btn-secondary">Limpiar</button>
+                <br>
+                <br>
+            </center>
+        </form>
+        {%if context%}
+        <center>
+            <div class="card"
+                style="width: 18rem; background: transparent; font-family: Georgia, 'Times New Roman', Times, serif;">
+                <img src=" http://openweathermap.org/img/w/{{ context.weather.0.icon }}.png" alt="..." width="100">
+                <div class="card-body>
+                    <h5 class=" card-title">{{context.name}}</h5>
+                    <p class="card-text">Temperatura: {{context.main.temp}} <img src="{{url_for('static', filename='tem.png') }}" width="50" alt="logo del clima"></p>
+                    <p class="card-text">Humedad: {{context.main.humidity}}<img src="{{url_for('static', filename='hum.png') }}" width="30" alt="logo del clima"></p>
+                    <p class="card-text">longitud: {{context.coord.lon}}<img src="{{url_for('static', filename='lon.png') }}" width="30" alt="logo del clima"></p>
+                    <p class="card-text">Latitud: {{context.coord.lat}}<img src="{{url_for('static', filename='la.png') }}" width="30" alt="logo del clima"></p>
+                    <p class="card-text">Presion: {{context.main.pressure}}<img src="{{url_for('static', filename='pre.png') }}" width="30" alt="logo del clima"></p>
+                </div>
+            </div>
+        </center>
+
+        {% endif%}
+
+
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
